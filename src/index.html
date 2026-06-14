@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zero</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div class="brand">
+        <span class="dot" id="statusDot"></span>
+        <h1>Zero</h1>
+        <span class="state" id="stateLabel">idle</span>
+      </div>
+      <div class="actions">
+        <button id="toggleListen" class="primary" title="Start/stop background listening">▶ Listen</button>
+        <button id="openSettings" class="ghost" title="Settings">⚙</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="orb-wrap">
+        <div class="orb" id="orb">
+          <div class="pulse"></div>
+          <div class="label">say "zero"</div>
+        </div>
+      </div>
+
+      <div class="conversation" id="conversation">
+        <div class="empty">Start a conversation. Say "<b>zero</b>" then your command, or type below.</div>
+      </div>
+
+      <form id="textForm" class="text-form">
+        <input type="text" id="textInput" placeholder="Type a message…" autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </main>
+
+    <div id="settings" class="settings hidden">
+      <div class="settings-head">
+        <h2>Settings</h2>
+        <button id="closeSettings" class="ghost">✕</button>
+      </div>
+      <div class="settings-body">
+        <fieldset>
+          <legend>Hermes</legend>
+          <label>Base URL (chat) <input id="cfg_hermes_url" type="text" placeholder="http://127.0.0.1:9120" /></label>
+          <label>Audio URL (transcribe/speak) <input id="cfg_hermes_audio_url" type="text" placeholder="http://127.0.0.1:9119" /></label>
+          <label>API key <input id="cfg_hermes_api_key" type="password" /></label>
+          <label>Session ID <input id="cfg_session_id" type="text" placeholder="zero-voice" /></label>
+          <label>Model <input id="cfg_model" type="text" placeholder="hermes" /></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Speech-to-Text</legend>
+          <label>Provider
+            <select id="cfg_stt_provider">
+              <option value="hermes">Hermes (server-side)</option>
+              <option value="openai">OpenAI Whisper</option>
+            </select>
+          </label>
+          <label>Microphone
+            <select id="cfg_microphone_device"></select>
+          </label>
+          <button type="button" id="refreshMics" class="ghost small">↻ refresh</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>Text-to-Speech</legend>
+          <label>Provider
+            <select id="cfg_tts_provider">
+              <option value="hermes">Hermes (server-side)</option>
+              <option value="openai">OpenAI TTS</option>
+              <option value="elevenlabs">ElevenLabs</option>
+            </select>
+          </label>
+          <label>Character / Voice
+            <select id="cfg_character">
+              <option value="alloy">alloy (OpenAI)</option>
+              <option value="echo">echo (OpenAI)</option>
+              <option value="fable">fable (OpenAI)</option>
+              <option value="onyx">onyx (OpenAI)</option>
+              <option value="nova">nova (OpenAI)</option>
+              <option value="shimmer">shimmer (OpenAI)</option>
+              <option value="assistant">assistant (Hermes default)</option>
+            </select>
+          </label>
+          <label>ElevenLabs voice ID <input id="cfg_elevenlabs_voice_id" type="text" placeholder="21m00Tcm4TlvDq8ikWAM" /></label>
+          <label>Output device
+            <select id="cfg_output_device"></select>
+          </label>
+          <button type="button" id="refreshOutputs" class="ghost small">↻ refresh</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>API keys</legend>
+          <label>OpenAI API key <input id="cfg_openai_api_key" type="password" /></label>
+          <label>ElevenLabs API key <input id="cfg_elevenlabs_api_key" type="password" /></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Wake word</legend>
+          <label>Wake word <input id="cfg_wake_word" type="text" placeholder="zero" /></label>
+          <label><input id="cfg_autostart" type="checkbox" /> Start on system login</label>
+        </fieldset>
+
+        <div class="settings-foot">
+          <button id="saveSettings" class="primary">Save</button>
+          <span id="saveStatus" class="save-status"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

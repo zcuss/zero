@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Zero",
+  "version": "0.1.0",
+  "identifier": "io.zero.app",
+  "build": {
+    "frontendDist": "../src"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Zero",
+        "width": 480,
+        "height": 720,
+        "minWidth": 380,
+        "minHeight": 520,
+        "resizable": true,
+        "fullscreen": false,
+        "decorations": true,
+        "transparent": false,
+        "visible": true
+      }
+    ],
+    "security": {
+      "csp": null
+    },
+    "trayIcon": {
+      "id": "zero-tray",
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": false,
+      "tooltip": "Zero — voice assistant"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico",
+      "icons/icon.png"
+    ],
+    "category": "Productivity",
+    "shortDescription": "Zero — voice AI assistant",
+    "longDescription": "Zero is a lightweight Tauri-based voice AI assistant that listens for wake word, transcribes speech, queries Hermes agent, and replies with TTS."
+  }
+}
