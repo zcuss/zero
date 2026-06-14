@@ -161,6 +161,7 @@ pub fn record_until_silence(
 }
 
 /// Write samples to a WAV file (16kHz mono PCM16).
+#[allow(dead_code)]
 pub fn write_wav(samples: &[i16], path: &std::path::Path) -> Result<()> {
     let spec = hound::WavSpec {
         channels: 1,
