@@ -1,6 +1,6 @@
 [package]
 name = "zero"
-version = "0.1.0"
+version = "0.1.1"
 description = "Zero - AI voice assistant (Tauri)"
 authors = ["zero"]
 edition = "2021"
