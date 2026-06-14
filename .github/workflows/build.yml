@@ -67,22 +67,21 @@ jobs:
   windows:
     name: Windows desktop
     runs-on: windows-latest
-    defaults:
-      run:
-        shell: bash
     steps:
       - uses: actions/checkout@v4
+      - uses: ilammy/msvc-dev-cmd@v1
       - uses: actions/setup-node@v4
         with: { node-version: 20, cache: npm }
       - uses: dtolnay/rust-toolchain@stable
         with: { targets: x86_64-pc-windows-msvc }
       - uses: swatinem/rust-cache@v2
         with: { workspaces: src-tauri -> target }
-      - uses: ilammy/msvc-dev-cmd@v1
-      - run: npm ci
-      - run: npm run tauri -- build --ci
-      - name: Upload
-        uses: actions/upload-artifact@v4
+      - shell: pwsh
+        run: |
+          $env:PATH = "$env:PATH;$env:CARGO_HOME\bin"
+          npm ci
+          npm run tauri -- build --ci
+      - uses: actions/upload-artifact@v4
         with:
           name: zero-windows
           path: |
@@ -122,7 +121,7 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
-          packages: 'platform-tools,platforms;android-34,build-tools;34.0.0'
+          packages: 'platform-tools platforms;android-34 build-tools;34.0.0'
 
       - name: Cache cargo + gradle
         uses: actions/cache@v4
