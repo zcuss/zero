@@ -51,16 +51,10 @@ async function loadConfig() {
 
 function populateConfigUI() {
   if (!cfg) return;
-  // normalize: hermes_url might be on 9119 (audio) — we also accept 9120
-  const audioUrl = cfg.hermes_url;
-  let chatUrl = audioUrl;
-  try {
-    const u = new URL(audioUrl);
-    if (u.port === "9119") u.port = "9120";
-    chatUrl = u.toString().replace(/\/$/, "");
-  } catch (_) {}
-  $("cfg_hermes_url").value = chatUrl;
-  $("cfg_hermes_audio_url").value = audioUrl;
+  // Single base URL for both chat + audio — Hermes exposes both on :9119
+  const baseUrl = (cfg.hermes_url || "http://127.0.0.1:9119").replace(/\/$/, "");
+  $("cfg_hermes_url").value = baseUrl;
+  $("cfg_hermes_audio_url").value = baseUrl;
   $("cfg_hermes_api_key").value = cfg.hermes_api_key || "";
   $("cfg_session_id").value = "zero-voice";
   $("cfg_model").value = "hermes";
