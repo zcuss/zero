@@ -136,11 +136,12 @@ jobs:
 
       - run: npm ci
       - name: Tauri Android build (unsigned)
-        run: npm run tauri -- android build --ci
         env:
-          ANDROID_HOME: ${{ steps.ndk.android-sdk-path }}/..
-          ANDROID_SDK_ROOT: ${{ steps.ndk.android-sdk-path }}/..
+          ANDROID_HOME: ${{ steps.ndk.android-sdk-path }}
+          ANDROID_SDK_ROOT: ${{ steps.ndk.android-sdk-path }}
           ANDROID_NDK_HOME: ${{ steps.ndk.ndk-path }}
+          NDK_HOME: ${{ steps.ndk.ndk-path }}
+        run: npm run tauri -- android build --ci
 
       - name: Sign APK (debug keystore for sideload, or upload keystore from secrets)
         env:
