@@ -8,6 +8,7 @@ use std::sync::{Arc, Mutex};
 pub const SAMPLE_RATE: u32 = 16000;
 pub const CHANNELS: u16 = 1;
 
+#[allow(dead_code)]
 pub struct AudioDevices {
     pub input: Option<cpal::Device>,
     pub output: Option<cpal::Device>,
@@ -39,6 +40,7 @@ pub fn get_input_device(name: &str) -> Result<cpal::Device> {
     }
 }
 
+#[allow(dead_code)]
 pub fn get_output_device(name: &str) -> Result<cpal::Device> {
     let host = cpal::default_host();
     if name == "default" || name.is_empty() {
@@ -103,7 +105,6 @@ pub fn record_until_silence(
     let max_samples = (max_ms * SAMPLE_RATE as u64) / 1000;
     let start = std::time::Instant::now();
 
-    let mut silent_run = 0u64;
     loop {
         std::thread::sleep(std::time::Duration::from_millis(50));
 

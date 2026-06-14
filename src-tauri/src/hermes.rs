@@ -156,11 +156,13 @@ async fn fetch_last_assistant(base: &str, cfg: &HermesConfig, pre: usize) -> Res
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[allow(dead_code)]
 pub struct CommandRequest {
     pub command: String,
     pub cwd: Option<String>,
 }
 
+#[allow(dead_code)]
 pub async fn run_command(req: CommandRequest, cfg: &HermesConfig) -> Result<String> {
     let base = cfg.base_url.trim_end_matches('/').to_string();
     let mut r = Client::new()
