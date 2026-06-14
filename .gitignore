@@ -1,9 +1,60 @@
-node_modules/
+# Rust / Cargo
 src-tauri/target/
+**/*.rs.bk
+Cargo.lock.bak
+
+# Tauri build outputs
+src-tauri/gen/schemas/
+src-tauri/WixTools/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp/
+.pnp.js
+
+# Android
 src-tauri/gen/android/.gradle/
 src-tauri/gen/android/build/
 src-tauri/gen/android/app/build/
 src-tauri/gen/android/app/.cxx/
+src-tauri/gen/android/local.properties
+src-tauri/gen/android/captures/
+src-tauri/gen/android/.idea/
+src-tauri/gen/android/*.iml
+src-tauri/gen/android/app/*.iml
+
+# Build artifacts (kept out of git — Actions rebuilds them)
 *.apk
 *.aab
+*.msi
+*.exe
+*.deb
+*.AppImage
+*.dmg
+*.app/
+
+# Tauri
+.tauri/
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Secrets / local config
+*.keystore
+*.jks
+keystore.properties
+.env
+.env.local
+
+# Misc
 *.log
+*.tmp
+*.bak
