@@ -137,8 +137,8 @@ jobs:
       - run: npm ci
       - name: Tauri Android build (unsigned)
         env:
-          ANDROID_HOME: ${{ steps.ndk.android-sdk-path }}
-          ANDROID_SDK_ROOT: ${{ steps.ndk.android-sdk-path }}
+          ANDROID_HOME: /usr/local/lib/android/sdk
+          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
           ANDROID_NDK_HOME: ${{ steps.ndk.ndk-path }}
           NDK_HOME: ${{ steps.ndk.ndk-path }}
         run: npm run tauri -- android build --ci
@@ -204,16 +204,19 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: src
       - name: Create source tarball
+        working-directory: src
         run: |
-          tar --exclude='node_modules' \
+          tar \
+              --exclude='node_modules' \
               --exclude='src-tauri/target' \
               --exclude='src-tauri/gen' \
-              --exclude='.git' \
               --exclude='*.apk' --exclude='*.aab' --exclude='*.msi' --exclude='*.exe' \
               --exclude='*.deb' --exclude='*.AppImage' --exclude='*.dmg' \
-              -czf zero-${{ github.ref_name }}-source.tar.gz .
-          ls -lh zero-*-source.tar.gz
+              -czf ../zero-${{ github.ref_name }}-source.tar.gz .
+          ls -lh ../zero-*-source.tar.gz
       - uses: actions/upload-artifact@v4
         with:
           name: zero-source
